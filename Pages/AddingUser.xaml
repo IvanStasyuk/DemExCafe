@@ -1,0 +1,44 @@
+﻿<Page x:Class="AppDemExCafe.Pages.AddingUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AppDemExCafe.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="Добавить пользователя">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Имя: "></TextBlock>
+                <TextBox x:Name="AddName" Text="{Binding NameUser}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Фамилия: "></TextBlock>
+                <TextBox x:Name="AddFamilia" Text="{Binding FamiliaUser}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Отчество: "></TextBlock>
+                <TextBox x:Name="AddPatronymic" Text="{Binding PatronymicUser}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Логин: "></TextBlock>
+                <TextBox x:Name="AddLogin" Text="{Binding Login}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Пароль: "></TextBlock>
+                <TextBox x:Name="AddPassword" Text="{Binding Password}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Роль: "></TextBlock>
+                <ComboBox x:Name="RolesList" Text="{Binding idRole}"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Статус: "></TextBlock>
+                <ComboBox x:Name="StatusList" Text="{Binding Status}"></ComboBox>
+            </StackPanel>
+        </StackPanel>
+        <Button x:Name="AddUser" VerticalAlignment="Bottom" Margin="50" Content="Добавить" Style="{StaticResource ButtonEnter}" Click="AddUser_Click"></Button>
+    </Grid>
+</Page>

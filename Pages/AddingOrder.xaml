@@ -1,0 +1,52 @@
+﻿<Page x:Class="AppDemExCafe.Pages.AddingOrder"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AppDemExCafe.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="Добавить заказ">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="ID пользователя: "></TextBlock>
+                <TextBox x:Name="AddID" Text="{Binding idUser}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Название заказа: "></TextBlock>
+                <TextBox x:Name="AddName" Text="{Binding NameOrder}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Номер столика: "></TextBlock>
+                <TextBox x:Name="AddNumberTable" Text="{Binding NumberTable}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Количество клиентов: "></TextBlock>
+                <TextBox x:Name="AddCountClients" Text="{Binding CountClients}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Заказанная еда: "></TextBlock>
+                <TextBox x:Name="AddOrderDish" Text="{Binding OrderDish}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Заказанная выпивка: "></TextBlock>
+                <TextBox x:Name="AddOrderDrink" Text="{Binding OrderDrink}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Статус: "></TextBlock>
+                <ComboBox x:Name="AddStatus" Text="{Binding Status}"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Дата начала: "></TextBlock>
+                <TextBox x:Name="AddDateStart" Text="{Binding DateStart}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Дата окончания: "></TextBlock>
+                <TextBox x:Name="AddDateEnd" Text="{Binding DateEnd}"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <Button x:Name="AddOrder" VerticalAlignment="Bottom" Margin="50" Content="Добавить" Style="{StaticResource ButtonEnter}" Click="AddOrder_Click"></Button>
+    </Grid>
+</Page>
