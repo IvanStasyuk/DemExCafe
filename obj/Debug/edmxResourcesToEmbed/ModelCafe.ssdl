@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DemExCafeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameUser" Type="nvarchar(max)" />
+    <Property Name="FamiliaUser" Type="nvarchar(max)" />
+    <Property Name="PatronymicUser" Type="nvarchar(max)" />
+    <Property Name="Login" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="idRole" Type="int" />
+    <Property Name="Status" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="idDish" />
+    </Key>
+    <Property Name="idDish" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameDish" Type="nvarchar(max)" />
+    <Property Name="Price" Type="money" />
+  </EntityType>
+  <EntityType Name="OrderedDishes">
+    <Key>
+      <PropertyRef Name="idOrderedDishes" />
+    </Key>
+    <Property Name="idOrderedDishes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idOrder" Type="int" />
+    <Property Name="idDish" Type="int" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" />
+    <Property Name="NameOrder" Type="nvarchar(max)" />
+    <Property Name="NumberTable" Type="int" />
+    <Property Name="CountClients" Type="int" />
+    <Property Name="OrderDish" Type="nvarchar(max)" />
+    <Property Name="OrderDrink" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="DateStart" Type="date" />
+    <Property Name="DateEnd" Type="date" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="idRole" />
+    </Key>
+    <Property Name="idRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameRole" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Shifts">
+    <Key>
+      <PropertyRef Name="idShift" />
+    </Key>
+    <Property Name="idShift" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" />
+    <Property Name="DateStart" Type="date" />
+    <Property Name="DateEnd" Type="date" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Employees_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderedDishes_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="OrderedDishes" Type="Self.OrderedDishes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="idDish" />
+      </Principal>
+      <Dependent Role="OrderedDishes">
+        <PropertyRef Name="idDish" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderedDishes_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="OrderedDishes" Type="Self.OrderedDishes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="OrderedDishes">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shifts_Employees">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="Shifts" Type="Self.Shifts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Shifts">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище DemExCafeModelContainer">
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderedDishes" EntityType="Self.OrderedDishes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Employees_Roles" Association="Self.FK_Employees_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderedDishes_Menu" Association="Self.FK_OrderedDishes_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="OrderedDishes" EntitySet="OrderedDishes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderedDishes_Orders" Association="Self.FK_OrderedDishes_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderedDishes" EntitySet="OrderedDishes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shifts_Employees" Association="Self.FK_Shifts_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Shifts" EntitySet="Shifts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

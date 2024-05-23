@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemExCafeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DemExCafeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employees" EntityType="DemExCafeModel.Employees" />
+    <EntitySet Name="Menu" EntityType="DemExCafeModel.Menu" />
+    <EntitySet Name="OrderedDishes" EntityType="DemExCafeModel.OrderedDishes" />
+    <EntitySet Name="Orders" EntityType="DemExCafeModel.Orders" />
+    <EntitySet Name="Roles" EntityType="DemExCafeModel.Roles" />
+    <EntitySet Name="Shifts" EntityType="DemExCafeModel.Shifts" />
+    <EntitySet Name="sysdiagrams" EntityType="DemExCafeModel.sysdiagrams" />
+    <AssociationSet Name="FK_Employees_Roles" Association="DemExCafeModel.FK_Employees_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employees" Association="DemExCafeModel.FK_Orders_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shifts_Employees" Association="DemExCafeModel.FK_Shifts_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Shifts" EntitySet="Shifts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderedDishes_Menu" Association="DemExCafeModel.FK_OrderedDishes_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="OrderedDishes" EntitySet="OrderedDishes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderedDishes_Orders" Association="DemExCafeModel.FK_OrderedDishes_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderedDishes" EntitySet="OrderedDishes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FamiliaUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PatronymicUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="idRole" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Roles" Relationship="DemExCafeModel.FK_Employees_Roles" FromRole="Employees" ToRole="Roles" />
+    <NavigationProperty Name="Orders" Relationship="DemExCafeModel.FK_Orders_Employees" FromRole="Employees" ToRole="Orders" />
+    <NavigationProperty Name="Shifts" Relationship="DemExCafeModel.FK_Shifts_Employees" FromRole="Employees" ToRole="Shifts" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="idDish" />
+    </Key>
+    <Property Name="idDish" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameDish" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="OrderedDishes" Relationship="DemExCafeModel.FK_OrderedDishes_Menu" FromRole="Menu" ToRole="OrderedDishes" />
+  </EntityType>
+  <EntityType Name="OrderedDishes">
+    <Key>
+      <PropertyRef Name="idOrderedDishes" />
+    </Key>
+    <Property Name="idOrderedDishes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idOrder" Type="Int32" />
+    <Property Name="idDish" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Menu" Relationship="DemExCafeModel.FK_OrderedDishes_Menu" FromRole="OrderedDishes" ToRole="Menu" />
+    <NavigationProperty Name="Orders" Relationship="DemExCafeModel.FK_OrderedDishes_Orders" FromRole="OrderedDishes" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUser" Type="Int32" />
+    <Property Name="NameOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumberTable" Type="Int32" />
+    <Property Name="CountClients" Type="Int32" />
+    <Property Name="OrderDish" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OrderDrink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateStart" Type="DateTime" Precision="0" />
+    <Property Name="DateEnd" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Employees" Relationship="DemExCafeModel.FK_Orders_Employees" FromRole="Orders" ToRole="Employees" />
+    <NavigationProperty Name="OrderedDishes" Relationship="DemExCafeModel.FK_OrderedDishes_Orders" FromRole="Orders" ToRole="OrderedDishes" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="idRole" />
+    </Key>
+    <Property Name="idRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employees" Relationship="DemExCafeModel.FK_Employees_Roles" FromRole="Roles" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Shifts">
+    <Key>
+      <PropertyRef Name="idShift" />
+    </Key>
+    <Property Name="idShift" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUser" Type="Int32" />
+    <Property Name="DateStart" Type="DateTime" Precision="0" />
+    <Property Name="DateEnd" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Employees" Relationship="DemExCafeModel.FK_Shifts_Employees" FromRole="Shifts" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Employees_Roles">
+    <End Type="DemExCafeModel.Roles" Role="Roles" Multiplicity="0..1" />
+    <End Type="DemExCafeModel.Employees" Role="Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employees">
+    <End Type="DemExCafeModel.Employees" Role="Employees" Multiplicity="0..1" />
+    <End Type="DemExCafeModel.Orders" Role="Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shifts_Employees">
+    <End Type="DemExCafeModel.Employees" Role="Employees" Multiplicity="0..1" />
+    <End Type="DemExCafeModel.Shifts" Role="Shifts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Shifts">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderedDishes_Menu">
+    <End Type="DemExCafeModel.Menu" Role="Menu" Multiplicity="0..1" />
+    <End Type="DemExCafeModel.OrderedDishes" Role="OrderedDishes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="idDish" />
+      </Principal>
+      <Dependent Role="OrderedDishes">
+        <PropertyRef Name="idDish" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderedDishes_Orders">
+    <End Type="DemExCafeModel.Orders" Role="Orders" Multiplicity="0..1" />
+    <End Type="DemExCafeModel.OrderedDishes" Role="OrderedDishes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="OrderedDishes">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
