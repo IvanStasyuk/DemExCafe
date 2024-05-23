@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d442905004e4490bad81dfb2d68195a4" Name="Diagram1">
+        <EntityTypeShape EntityType="DemExCafeModel.Employees" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="DemExCafeModel.Menu" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="DemExCafeModel.OrderedDishes" Width="1.5" PointX="7.5" PointY="1.75" />
+        <EntityTypeShape EntityType="DemExCafeModel.Orders" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="DemExCafeModel.Roles" Width="1.5" PointX="0.75" PointY="3.375" />
+        <EntityTypeShape EntityType="DemExCafeModel.Shifts" Width="1.5" PointX="5.25" PointY="5.25" />
+        <EntityTypeShape EntityType="DemExCafeModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="DemExCafeModel.FK_Employees_Roles" />
+        <AssociationConnector Association="DemExCafeModel.FK_Orders_Employees" />
+        <AssociationConnector Association="DemExCafeModel.FK_Shifts_Employees" />
+        <AssociationConnector Association="DemExCafeModel.FK_OrderedDishes_Menu" />
+        <AssociationConnector Association="DemExCafeModel.FK_OrderedDishes_Orders" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
